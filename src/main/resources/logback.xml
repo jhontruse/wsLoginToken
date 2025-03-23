@@ -1,0 +1,51 @@
+<configuration>
+
+    <!-- Definir el patrón de logs -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/Users/jhontrujilloserrano/Desktop/DEVELOPER/wsLoginToken/log/logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                /Users/jhontrujilloserrano/Desktop/DEVELOPER/wsLoginToken/log/logs/application-%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configurar el log para consultas JDBC -->
+    <logger name="org.springframework.jdbc.core.JdbcTemplate" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <!-- Configurar el log de conexión a la base de datos -->
+    <logger name="com.zaxxer.hikari.HikariDataSource" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <!-- Configuración general -->
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+    </root>
+
+<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>/Users/jhontrujilloserrano/Desktop/DEVELOPER/wsLoginToken/log/logs/application_sb.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>logs/application_sb-%d{yyyy-MM-dd}.log</fileNamePattern>
+        <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+</appender>
+
+<!-- Logs generales -->
+<logger name="com.tuempresa" level="DEBUG">
+    <appender-ref ref="FILE"/>
+</logger>
+
+<root level="INFO">
+    <appender-ref ref="FILE"/>
+</root>
+</configuration>
